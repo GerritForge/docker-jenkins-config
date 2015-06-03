@@ -25,6 +25,8 @@
     <hudson.search.UserSearchProperty>
       <insensitiveSearch>false</insensitiveSearch>
     </hudson.search.UserSearchProperty>
-    <hudson.tasks.Mailer_-UserProperty plugin="mailer@1.11"/>
+    <hudson.tasks.Mailer_-UserProperty plugin="mailer@1.11">
+      <emailAddress>galarragas@gmail.com</emailAddress>
+    </hudson.tasks.Mailer_-UserProperty>
   </properties>
 </user>
