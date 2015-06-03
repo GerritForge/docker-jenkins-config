@@ -76,7 +76,7 @@
       <name>sbt 0.13.8</name>
       <jvmFlags></jvmFlags>
       <sbtFlags>-Dsbt.log.noformat=true</sbtFlags>
-      <actions>test</actions>
+      <actions>package</actions>
       <subdirPath></subdirPath>
     </org.jvnet.hudson.plugins.SbtPluginBuilder>
   </builders>
