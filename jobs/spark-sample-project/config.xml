@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description></description>
+  <description>Spark sample project</description>
   <keepDependencies>false</keepDependencies>
   <properties/>
   <scm class="hudson.plugins.git.GitSCM" plugin="git@2.3.5">
@@ -9,7 +9,6 @@
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
         <url>ssh://gerritforgebuild@mesos1.gerritforge.com:29418/GerritForge/spark-etl-demo.git</url>
-        <credentialsId>26586d53-723d-49e8-acc8-2f63105414dc</credentialsId>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
@@ -34,7 +33,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <org.jvnet.hudson.plugins.SbtPluginBuilder plugin="sbt@1.5">
-      <name>sbt 13.8</name>
+      <name></name>
       <jvmFlags></jvmFlags>
       <sbtFlags>-Dsbt.log.noformat=true</sbtFlags>
       <actions>test</actions>
