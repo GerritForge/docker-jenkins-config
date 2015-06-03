@@ -6,7 +6,7 @@
       <collapsed/>
     </hudson.model.PaneStatusProperties>
     <jenkins.security.ApiTokenProperty>
-      <apiToken>CTfb0iBsywlP2kny+Q0OA5IrJEqp/S4ewUkKCxZt5RQlo7bHxk36IfsPabPOBzUp</apiToken>
+      <apiToken>9MOrEFg1wSgdCgzxbq3Wap50pGeBz+jM1PkzA5UrTvneN/8Hk/rujj3bZ6p19TpCXZEE9wJKZK8tpvBFFZmfX8M0XdN//UYTj91K7d+ctnc=</apiToken>
     </jenkins.security.ApiTokenProperty>
     <com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty plugin="credentials@1.18">
       <domainCredentialsMap class="hudson.util.CopyOnWriteMap$Hash"/>
