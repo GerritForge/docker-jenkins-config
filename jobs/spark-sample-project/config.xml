@@ -33,7 +33,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <org.jvnet.hudson.plugins.SbtPluginBuilder plugin="sbt@1.5">
-      <name></name>
+      <name>sbt 0.13.8</name>
       <jvmFlags></jvmFlags>
       <sbtFlags>-Dsbt.log.noformat=true</sbtFlags>
       <actions>test</actions>
