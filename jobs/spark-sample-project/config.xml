@@ -84,7 +84,17 @@
       <subdirPath></subdirPath>
     </org.jvnet.hudson.plugins.SbtPluginBuilder>
   </builders>
-  <publishers/>
+  <publishers>
+    <hudson.tasks.BuildTrigger>
+      <childProjects>spark-sample-project-integration-tests</childProjects>
+      <threshold>
+        <name>SUCCESS</name>
+        <ordinal>0</ordinal>
+        <color>BLUE</color>
+        <completeBuild>true</completeBuild>
+      </threshold>
+    </hudson.tasks.BuildTrigger>
+  </publishers>
   <buildWrappers>
     <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.4.1">
       <colorMapName>xterm</colorMapName>
