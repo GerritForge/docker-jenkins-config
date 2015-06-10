@@ -26,7 +26,7 @@
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
-    <com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.GerritTrigger plugin="gerrit-trigger@2.13.0">
+    <com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.GerritTrigger plugin="gerrit-trigger@2.14.0">
       <spec></spec>
       <gerritProjects>
         <com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.data.GerritProject>
@@ -68,7 +68,6 @@
           <excludeNoCodeChange>true</excludeNoCodeChange>
         </com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.events.PluginPatchsetCreatedEvent>
       </triggerOnEvents>
-      <allowTriggeringUnreviewedPatches>false</allowTriggeringUnreviewedPatches>
       <dynamicTriggerConfiguration>false</dynamicTriggerConfiguration>
       <triggerConfigURL></triggerConfigURL>
       <triggerInformationAction/>
@@ -85,15 +84,20 @@
     </org.jvnet.hudson.plugins.SbtPluginBuilder>
   </builders>
   <publishers>
-    <hudson.tasks.BuildTrigger>
-      <childProjects>spark-sample-project-integration-tests</childProjects>
-      <threshold>
-        <name>SUCCESS</name>
-        <ordinal>0</ordinal>
-        <color>BLUE</color>
-        <completeBuild>true</completeBuild>
-      </threshold>
-    </hudson.tasks.BuildTrigger>
+    <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.26">
+      <configs>
+        <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
+          <configs>
+            <hudson.plugins.git.GitRevisionBuildParameters plugin="git@2.3.5">
+              <combineQueuedCommits>false</combineQueuedCommits>
+            </hudson.plugins.git.GitRevisionBuildParameters>
+          </configs>
+          <projects>spark-sample-project-integration-tests, </projects>
+          <condition>SUCCESS</condition>
+          <triggerWithNoParameters>false</triggerWithNoParameters>
+        </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
+      </configs>
+    </hudson.plugins.parameterizedtrigger.BuildTrigger>
   </publishers>
   <buildWrappers>
     <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.4.1">
