@@ -29,7 +29,8 @@
   <builders>
     <hudson.tasks.Shell>
       <command>cd src/test/scripts 
-TEST_RESULT=`./start-test.sh $WORKSPACE`
+./start-test.sh $WORKSPACE
+TEST_RESULT=$?
 echo &apos;Stopping cdh docker&apos;
 ./stop_cdh_docker.sh
 echo &apos;Stopping db docker&apos;
