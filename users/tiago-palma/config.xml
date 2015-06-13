@@ -6,7 +6,7 @@
       <collapsed/>
     </hudson.model.PaneStatusProperties>
     <jenkins.security.ApiTokenProperty>
-      <apiToken>t+nyUrfDn0N+AAXd3DgSBNOx6KYhIYdvTWrwCZTILqsMibpigK9aOniJuCwpnu5x0RL0ug5gVCjobQMdbNGHzg4yTXck1etJDsrsbaWEuQJOictYfpkJfNcnUvYoyNZTAHD2RiZmb0c2rozDlNQCI6NZIiTFCOS4SrrBnxaD8gB6fTrU/yemSjaiuZ62uubVxOYUD0rCM0jWre5+eZ25Mb2QCq89F+zEN7WxFNIAgco3/9E8SN/mpdkK0sdozZLp</apiToken>
+      <apiToken>oi1jtNM6IAVg+dXa8Si1TXKVICDuQIpBn+6tYtNc8QgeQtIXoa4xmmdI1Dsd5KPQ3XfvVhUibUhpzUJe22di1u07cC/dCZV5PNMAGCU2dMhRaz6XBw2C3Yz3/uxvF8oW0/kHlzgPAS4acR/rNK7zM6U8TZKNs2QXxE8qUmXlYR9LgZXnVwFibrmL4/RgOK8iQfg7MS3Ol0iQyivGap0o+h98O00/bz3VG/f3lGC8p7xnmbC0N6a8qcz3ARmNF8Rz</apiToken>
     </jenkins.security.ApiTokenProperty>
     <com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty plugin="credentials@1.18">
       <domainCredentialsMap class="hudson.util.CopyOnWriteMap$Hash"/>
