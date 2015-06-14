@@ -104,7 +104,8 @@ echo &quot;Initializing DB with test data&quot;
 docker exec -i $ORACLE_CONTAINER \
     bash -c &apos;export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe;export ORACLE_SID=XE;echo exit |  /u01/app/oracle/product/11.2.0/xe/bin/sqlplus system/oracle  @/test/cfg/InitCustomer.sql&apos;
 
-sleep 360
+#Workarounding the problem with the Wait For Port timing out before CDH Docker is fully up
+sleep 120
 
 echo &quot;Starting spark job&quot;
 docker exec -i $CDH_CONTAINER bash -c  &quot;export SPARK_CLASSPATH=/root/spark-etl/extra-libs/ojdbc6.jar;bash -x /root/spark-etl/src/test/scripts/CustomerCDCDataBaseImporterIT.sh /root/spark-etl oracle-juc&quot;
