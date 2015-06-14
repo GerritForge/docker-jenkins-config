@@ -55,7 +55,7 @@
         <command></command>
         <hostName></hostName>
         <containerName>cdh</containerName>
-        <envVars></envVars>
+        <envVars>TERM=xterm</envVars>
         <links></links>
         <exposedPorts></exposedPorts>
         <cpuShares></cpuShares>
@@ -85,7 +85,7 @@ $WORKSPACE/src/test/resources /test/cfg</bindMounts>
         <links>oracle-juc:oracle-juc</links>
         <bindMounts>$WORKSPACE /root/spark-etl</bindMounts>
         <privileged>false</privileged>
-        <containerIdsLogging></containerIdsLogging>
+        <containerIdsLogging>cdh</containerIdsLogging>
       </dockerCmd>
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.25">
