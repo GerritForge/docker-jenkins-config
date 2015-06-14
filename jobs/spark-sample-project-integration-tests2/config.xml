@@ -82,8 +82,7 @@
         <containerIds>cdh</containerIds>
         <publishAllPorts>false</publishAllPorts>
         <portBindings></portBindings>
-        <waitPorts>cdh 7077
-cdh 8081</waitPorts>
+        <waitPorts>cdh 8080</waitPorts>
         <links>oracle-juc:oracle-juc</links>
         <bindMounts>/docker/jenkins-master/workspace/spark-sample-project-integration-tests2 /root/spark-etl
 </bindMounts>
