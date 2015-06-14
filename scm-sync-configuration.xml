@@ -8,5 +8,6 @@
   <manualSynchronizationIncludes>
     <include>org.jvnet.hudson.plugins.SbtPluginBuilder.xml</include>
     <include>gerrit-trigger.xml</include>
+    <include>org.jenkinsci.plugins.dockerbuildstep.DockerBuilder.xml</include>
   </manualSynchronizationIncludes>
 </hudson.plugins.scm__sync__configuration.ScmSyncConfigurationPlugin>
