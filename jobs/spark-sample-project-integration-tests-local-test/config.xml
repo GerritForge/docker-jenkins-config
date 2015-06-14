@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.3.5">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <name>Gerrit Changes</name>
+        <refspec>+refs/changes/*:refs/remotes/origin/*</refspec>
+        <url>ssh://gerritforgebuild@mesos1.gerritforge.com:29418/GerritForge/spark-etl-demo.git</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>*/master</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions/>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.25">
+      <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.StartCommand">
+        <containerIds>mesos3.gerritforge.com:5000/oracle-juc</containerIds>
+        <publishAllPorts>false</publishAllPorts>
+        <portBindings></portBindings>
+        <waitPorts>1521</waitPorts>
+        <links></links>
+        <bindMounts>$WORKSPACE/data:/test/data,$WORKSPACE/src/test/resources:/test/cfg</bindMounts>
+        <privileged>false</privileged>
+        <containerIdsLogging>mesos3.gerritforge.com:5000/oracle-juc</containerIdsLogging>
+      </dockerCmd>
+    </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
+    <com.nirima.jenkins.plugins.docker.builder.DockerBuilderControl plugin="docker-plugin@0.9.2">
+      <option class="com.nirima.jenkins.plugins.docker.builder.DockerBuilderControlOptionStop">
+        <cloudName></cloudName>
+        <containerId>mesos3.gerritforge.com:5000/oracle-juc</containerId>
+        <remove>false</remove>
+      </option>
+    </com.nirima.jenkins.plugins.docker.builder.DockerBuilderControl>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>
