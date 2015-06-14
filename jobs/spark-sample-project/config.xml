@@ -25,10 +25,52 @@
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
-    <hudson.triggers.SCMTrigger>
-      <spec>H/15 * * * *</spec>
-      <ignorePostCommitHooks>false</ignorePostCommitHooks>
-    </hudson.triggers.SCMTrigger>
+    <com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.GerritTrigger plugin="gerrit-trigger@2.14.0">
+      <spec></spec>
+      <gerritProjects>
+        <com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.data.GerritProject>
+          <compareType>ANT</compareType>
+          <pattern></pattern>
+          <branches>
+            <com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.data.Branch>
+              <compareType>PLAIN</compareType>
+              <pattern></pattern>
+            </com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.data.Branch>
+          </branches>
+        </com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.data.GerritProject>
+      </gerritProjects>
+      <skipVote>
+        <onSuccessful>false</onSuccessful>
+        <onFailed>false</onFailed>
+        <onUnstable>false</onUnstable>
+        <onNotBuilt>false</onNotBuilt>
+      </skipVote>
+      <silentMode>false</silentMode>
+      <notificationLevel></notificationLevel>
+      <silentStartMode>false</silentStartMode>
+      <escapeQuotes>true</escapeQuotes>
+      <noNameAndEmailParameters>false</noNameAndEmailParameters>
+      <dependencyJobsNames></dependencyJobsNames>
+      <readableMessage>false</readableMessage>
+      <buildStartMessage></buildStartMessage>
+      <buildFailureMessage></buildFailureMessage>
+      <buildSuccessfulMessage></buildSuccessfulMessage>
+      <buildUnstableMessage></buildUnstableMessage>
+      <buildNotBuiltMessage></buildNotBuiltMessage>
+      <buildUnsuccessfulFilepath></buildUnsuccessfulFilepath>
+      <customUrl></customUrl>
+      <serverName>__ANY__</serverName>
+      <triggerOnEvents>
+        <com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.events.PluginPatchsetCreatedEvent>
+          <excludeDrafts>true</excludeDrafts>
+          <excludeTrivialRebase>false</excludeTrivialRebase>
+          <excludeNoCodeChange>true</excludeNoCodeChange>
+        </com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.events.PluginPatchsetCreatedEvent>
+      </triggerOnEvents>
+      <dynamicTriggerConfiguration>false</dynamicTriggerConfiguration>
+      <triggerConfigURL></triggerConfigURL>
+      <triggerInformationAction/>
+    </com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.GerritTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
