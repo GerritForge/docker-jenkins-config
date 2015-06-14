@@ -93,18 +93,21 @@
     <hudson.tasks.Shell>
       <command>TERM=xterm
 
+echo &quot;Docker IDs: &quot; $DOCKER_CONTAINER_IDS 
+
 export DOCKER_HOST=&quot;tcp://188.165.175.129:4243&quot;
-CONTAINER=$(docker ps | grep cdh-juc | awk &apos;{ print $1 }&apos;)
-docker exec -i $CONTAINER bash -c  &quot;export SPARK_CLASSPATH=/root/spark-etl/extra-libs/ojdbc6.jar;ls -ltR /root/spark-etl;ls /masteropt;bash -x /root/spark-etl/src/test/scripts/CustomerCDCDataBaseImporterIT.sh /root/spark-etl oracle-juc&quot;
+
+CDH_CONTAINER=$(docker ps | grep cdh-juc | awk &apos;{ print $1 }&apos;)
+ORACLE_CONTAINER=$(docker ps | grep oracle-juc | awk &apos;{ print $1 }&apos;)
+
+#Init DB:
+docker exec -i -t $ORACLE_CONTAINER \
+    bash -c &apos;export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe;export ORACLE_SID=XE;echo exit |  /u01/app/oracle/product/11.2.0/xe/bin/sqlplus system/oracle  @/test/cfg/InitCustomer.sql&apos;
+
+docker exec -i $CDH_CONTAINER bash -c  &quot;export SPARK_CLASSPATH=/root/spark-etl/extra-libs/ojdbc6.jar;bash -x /root/spark-etl/src/test/scripts/CustomerCDCDataBaseImporterIT.sh /root/spark-etl oracle-juc&quot;
 
 </command>
     </hudson.tasks.Shell>
-    <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.25">
-      <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.ExecCreateCommand">
-        <containerIds>cdh</containerIds>
-        <command>bash -c  &quot;export SPARK_CLASSPATH=/root/spark-etl/extra-libs/ojdbc6.jar; ./root/spark-etl/src/test/scripts/CustomerCDCDataBaseImporterIT.sh /root/spark-etl oracle-juc&quot;</command>
-      </dockerCmd>
-    </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
   </builders>
   <publishers>
     <org.jenkinsci.plugins.dockerbuildstep.DockerPostBuilder_-DockerPostBuildStep plugin="docker-build-step@1.25">
