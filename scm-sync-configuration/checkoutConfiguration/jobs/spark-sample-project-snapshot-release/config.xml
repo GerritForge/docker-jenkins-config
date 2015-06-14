@@ -26,7 +26,7 @@
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
-    <com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.GerritTrigger plugin="gerrit-trigger@2.14.0">
+    <com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.GerritTrigger plugin="gerrit-trigger@2.13.0">
       <spec></spec>
       <gerritProjects>
         <com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.data.GerritProject>
@@ -34,8 +34,8 @@
           <pattern>GerritForge/spark-etl-demo</pattern>
           <branches>
             <com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.data.Branch>
-              <compareType>ANT</compareType>
-              <pattern>**</pattern>
+              <compareType>PLAIN</compareType>
+              <pattern>master</pattern>
             </com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.data.Branch>
           </branches>
         </com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.data.GerritProject>
@@ -62,12 +62,9 @@
       <customUrl></customUrl>
       <serverName>gerrit-on-mesos</serverName>
       <triggerOnEvents>
-        <com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.events.PluginPatchsetCreatedEvent>
-          <excludeDrafts>true</excludeDrafts>
-          <excludeTrivialRebase>true</excludeTrivialRebase>
-          <excludeNoCodeChange>true</excludeNoCodeChange>
-        </com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.events.PluginPatchsetCreatedEvent>
+        <com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.events.PluginChangeMergedEvent/>
       </triggerOnEvents>
+      <allowTriggeringUnreviewedPatches>false</allowTriggeringUnreviewedPatches>
       <dynamicTriggerConfiguration>false</dynamicTriggerConfiguration>
       <triggerConfigURL></triggerConfigURL>
       <triggerInformationAction/>
@@ -79,26 +76,11 @@
       <name>sbt 0.13.8</name>
       <jvmFlags></jvmFlags>
       <sbtFlags>-Dsbt.log.noformat=true</sbtFlags>
-      <actions>test</actions>
+      <actions>package</actions>
       <subdirPath></subdirPath>
     </org.jvnet.hudson.plugins.SbtPluginBuilder>
   </builders>
-  <publishers>
-    <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.26">
-      <configs>
-        <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
-          <configs>
-            <hudson.plugins.git.GitRevisionBuildParameters plugin="git@2.3.5">
-              <combineQueuedCommits>false</combineQueuedCommits>
-            </hudson.plugins.git.GitRevisionBuildParameters>
-          </configs>
-          <projects>spark-sample-project-integration-tests, </projects>
-          <condition>SUCCESS</condition>
-          <triggerWithNoParameters>false</triggerWithNoParameters>
-        </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
-      </configs>
-    </hudson.plugins.parameterizedtrigger.BuildTrigger>
-  </publishers>
+  <publishers/>
   <buildWrappers>
     <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.4.1">
       <colorMapName>xterm</colorMapName>
