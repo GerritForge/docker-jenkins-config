@@ -49,7 +49,7 @@
               <combineQueuedCommits>false</combineQueuedCommits>
             </hudson.plugins.git.GitRevisionBuildParameters>
           </configs>
-          <projects>spark-sample-project-integration-tests, </projects>
+          <projects>spark-sample-project-integration-tests,</projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
