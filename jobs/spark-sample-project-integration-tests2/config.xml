@@ -82,7 +82,8 @@
         <containerIds>cdh</containerIds>
         <publishAllPorts>false</publishAllPorts>
         <portBindings></portBindings>
-        <waitPorts>cdh 7077</waitPorts>
+        <waitPorts>cdh 7077
+cdh 8081</waitPorts>
         <links>oracle-juc:oracle-juc</links>
         <bindMounts>/docker/jenkins-master/workspace/spark-sample-project-integration-tests2 /root/spark-etl
 </bindMounts>
@@ -100,10 +101,11 @@ export DOCKER_HOST=&quot;tcp://188.165.175.129:4243&quot;
 CDH_CONTAINER=$(docker ps | grep cdh-juc | awk &apos;{ print $1 }&apos;)
 ORACLE_CONTAINER=$(docker ps | grep oracle-juc | awk &apos;{ print $1 }&apos;)
 
-#Init DB:
+echo &quot;Initializing DB with test data&quot;
 docker exec -i $ORACLE_CONTAINER \
     bash -c &apos;export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe;export ORACLE_SID=XE;echo exit |  /u01/app/oracle/product/11.2.0/xe/bin/sqlplus system/oracle  @/test/cfg/InitCustomer.sql&apos;
 
+echo &quot;Starting spark job&quot;
 docker exec -i $CDH_CONTAINER bash -c  &quot;export SPARK_CLASSPATH=/root/spark-etl/extra-libs/ojdbc6.jar;bash -x /root/spark-etl/src/test/scripts/CustomerCDCDataBaseImporterIT.sh /root/spark-etl oracle-juc&quot;
 
 </command>
