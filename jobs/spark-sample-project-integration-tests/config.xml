@@ -91,7 +91,7 @@ $WORKSPACE/src/test/resources /test/cfg</bindMounts>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.25">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.ExecCreateAndStartCommand">
         <containerIds>cdh</containerIds>
-        <command>export SPARK_CLASSPATH=/root/spark-etl/extra-libs/ojdbc6.jar; ./root/spark-etl/src/test/scripts/CustomerCDCDataBaseImporterIT.sh /root/spark-etl oracle-juc</command>
+        <command>&quot;export SPARK_CLASSPATH=/root/spark-etl/extra-libs/ojdbc6.jar; ./root/spark-etl/src/test/scripts/CustomerCDCDataBaseImporterIT.sh /root/spark-etl oracle-juc&quot;</command>
       </dockerCmd>
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
   </builders>
