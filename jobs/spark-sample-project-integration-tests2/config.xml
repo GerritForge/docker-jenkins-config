@@ -98,7 +98,7 @@ $WORKSPACE/src/test/resources /test/cfg</bindMounts>
       <command>TERM=xterm
 export DOCKER_HOST=&quot;tcp://188.165.175.129:4243&quot;
 CONTAINER=$(docker ps | grep cdh-juc | awk &apos;{ print $1 }&apos;)
-docker exec -i $CONTAINER bash -c  &quot;export SPARK_CLASSPATH=/root/spark-etl/extra-libs/ojdbc6.jar; ls -la /root/; bash -x ./root/spark-etl/src/test/scripts/CustomerCDCDataBaseImporterIT.sh /root/spark-etl oracle-juc&quot;
+docker exec -i $CONTAINER bash -c  &quot;export SPARK_CLASSPATH=/root/spark-etl/extra-libs/ojdbc6.jar; ls -la /root/; ls -la /root/spark-etl/src/test/scripts/; bash -x ./root/spark-etl/src/test/scripts/CustomerCDCDataBaseImporterIT.sh /root/spark-etl oracle-juc&quot;
 
 #docker exec -i $cdh -tls /bin/bash -c &quot;export SPARK_CLASSPATH=/root/spark-etl/extra-libs/ojdbc6.jar; ./root/spark-etl/src/test/scripts/CustomerCDCDataBaseImporterIT.sh /root/spark-etl oracle-juc&quot;
 </command>
