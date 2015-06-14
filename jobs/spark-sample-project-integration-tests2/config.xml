@@ -51,7 +51,7 @@
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.25">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.CreateContainerCommand">
-        <image>mesos3.gerritforge.com/cdh-juc</image>
+        <image>mesos3.gerritforge.com:5000/cdh-juc</image>
         <command></command>
         <hostName></hostName>
         <containerName>cdh</containerName>
