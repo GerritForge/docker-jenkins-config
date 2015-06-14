@@ -70,8 +70,8 @@
         <waitPorts>oracle-juc 1521
 </waitPorts>
         <links></links>
-        <bindMounts>/docker/jenkins-master/workspace/spark-sample-project-integration-tests2/data /test/data
-/docker/jenkins-master/workspace/spark-sample-project-integration-tests2/src/test/resources /test/cfg
+        <bindMounts>/docker/jenkins-master/workspace/spark-sample-project-integration-tests/data /test/data
+/docker/jenkins-master/workspace/spark-sample-project-integration-tests/src/test/resources /test/cfg
 </bindMounts>
         <privileged>false</privileged>
         <containerIdsLogging>mesos3.gerritforge.com:5000/oracle-juc</containerIdsLogging>
