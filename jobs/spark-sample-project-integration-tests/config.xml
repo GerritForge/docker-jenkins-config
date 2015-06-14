@@ -36,7 +36,8 @@
         <portBindings></portBindings>
         <waitPorts>1521</waitPorts>
         <links></links>
-        <bindMounts>$WORKSPACE/data:/test/data,$WORKSPACE/src/test/resources:/test/cfg</bindMounts>
+        <bindMounts>$WORKSPACE/data /test/data
+$WORKSPACE/src/test/resources /test/cfg</bindMounts>
         <privileged>false</privileged>
         <containerIdsLogging>mesos3.gerritforge.com:5000/oracle-juc</containerIdsLogging>
       </dockerCmd>
