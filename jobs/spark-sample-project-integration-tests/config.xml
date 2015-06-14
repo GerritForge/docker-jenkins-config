@@ -47,7 +47,7 @@
         <containerIds>oracle-juc</containerIds>
         <publishAllPorts>false</publishAllPorts>
         <portBindings></portBindings>
-        <waitPorts>1521</waitPorts>
+        <waitPorts>oracle-juc 1521</waitPorts>
         <links></links>
         <bindMounts>$WORKSPACE/data /test/data
 $WORKSPACE/src/test/resources /test/cfg</bindMounts>
