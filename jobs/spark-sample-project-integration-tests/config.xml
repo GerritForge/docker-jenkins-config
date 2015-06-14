@@ -30,8 +30,21 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.25">
+      <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.CreateContainerCommand">
+        <image>mesos3.gerritforge.com:5000/oracle-juc</image>
+        <command></command>
+        <hostName></hostName>
+        <containerName>oracle-juc</containerName>
+        <envVars></envVars>
+        <links></links>
+        <exposedPorts></exposedPorts>
+        <cpuShares></cpuShares>
+        <memoryLimit></memoryLimit>
+      </dockerCmd>
+    </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
+    <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.25">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.StartCommand">
-        <containerIds>0c580473c562</containerIds>
+        <containerIds>oracle-juc</containerIds>
         <publishAllPorts>false</publishAllPorts>
         <portBindings></portBindings>
         <waitPorts>1521</waitPorts>
@@ -45,8 +58,8 @@ $WORKSPACE/src/test/resources /test/cfg</bindMounts>
     <com.nirima.jenkins.plugins.docker.builder.DockerBuilderControl plugin="docker-plugin@0.9.2">
       <option class="com.nirima.jenkins.plugins.docker.builder.DockerBuilderControlOptionStop">
         <cloudName></cloudName>
-        <containerId>mesos3.gerritforge.com:5000/oracle-juc</containerId>
-        <remove>false</remove>
+        <containerId>$DOCKER_CONTAINER_IDS</containerId>
+        <remove>true</remove>
       </option>
     </com.nirima.jenkins.plugins.docker.builder.DockerBuilderControl>
   </builders>
