@@ -84,7 +84,8 @@
         <portBindings></portBindings>
         <waitPorts></waitPorts>
         <links>oracle-juc:oracle-juc</links>
-        <bindMounts>/var/jenkins_home/workspace/spark-sample-project-integration-tests2 /root/spark-etl</bindMounts>
+        <bindMounts>/var/jenkins_home/workspace/spark-sample-project-integration-tests2 /root/spark-etl
+/opt /masteropt</bindMounts>
         <privileged>false</privileged>
         <containerIdsLogging>cdh</containerIdsLogging>
       </dockerCmd>
@@ -94,9 +95,8 @@
 
 export DOCKER_HOST=&quot;tcp://188.165.175.129:4243&quot;
 CONTAINER=$(docker ps | grep cdh-juc | awk &apos;{ print $1 }&apos;)
-docker exec -i $CONTAINER bash -c  &quot;export SPARK_CLASSPATH=/root/spark-etl/extra-libs/ojdbc6.jar;ls -ltR /root/spark-etl;bash -x /root/spark-etl/src/test/scripts/CustomerCDCDataBaseImporterIT.sh /root/spark-etl oracle-juc&quot;
+docker exec -i $CONTAINER bash -c  &quot;export SPARK_CLASSPATH=/root/spark-etl/extra-libs/ojdbc6.jar;ls -ltR /root/spark-etl;ls /masteropt;bash -x /root/spark-etl/src/test/scripts/CustomerCDCDataBaseImporterIT.sh /root/spark-etl oracle-juc&quot;
 
-#docker exec -i $cdh -tls /bin/bash -c &quot;export SPARK_CLASSPATH=/root/spark-etl/extra-libs/ojdbc6.jar; ./root/spark-etl/src/test/scripts/CustomerCDCDataBaseImporterIT.sh /root/spark-etl oracle-juc&quot;
 </command>
     </hudson.tasks.Shell>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.25">
