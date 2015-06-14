@@ -43,12 +43,26 @@
       </dockerCmd>
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.25">
+      <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.CreateContainerCommand">
+        <image>mesos3.gerritforge.com/cdh-juc</image>
+        <command></command>
+        <hostName></hostName>
+        <containerName>cdh</containerName>
+        <envVars></envVars>
+        <links></links>
+        <exposedPorts></exposedPorts>
+        <cpuShares></cpuShares>
+        <memoryLimit></memoryLimit>
+      </dockerCmd>
+    </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
+    <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.25">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.StartCommand">
-        <containerIds>oracle-juc</containerIds>
+        <containerIds>oracle-juc,cdh</containerIds>
         <publishAllPorts>false</publishAllPorts>
         <portBindings></portBindings>
-        <waitPorts>oracle-juc 1521</waitPorts>
-        <links></links>
+        <waitPorts>oracle-juc 1521
+</waitPorts>
+        <links>oracle-juc:oracle-juc</links>
         <bindMounts>$WORKSPACE/data /test/data
 $WORKSPACE/src/test/resources /test/cfg</bindMounts>
         <privileged>false</privileged>
@@ -57,12 +71,12 @@ $WORKSPACE/src/test/resources /test/cfg</bindMounts>
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.25">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.KillCommand">
-        <containerIds>oracle-juc</containerIds>
+        <containerIds>oracle-juc,cdh</containerIds>
       </dockerCmd>
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.25">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.RemoveCommand">
-        <containerIds>oracle-juc</containerIds>
+        <containerIds>oracle-juc,cdh</containerIds>
         <ignoreIfNotFound>false</ignoreIfNotFound>
         <removeVolumes>false</removeVolumes>
       </dockerCmd>
