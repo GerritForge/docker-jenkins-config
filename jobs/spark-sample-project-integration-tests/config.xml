@@ -55,13 +55,11 @@ $WORKSPACE/src/test/resources /test/cfg</bindMounts>
         <containerIdsLogging>mesos3.gerritforge.com:5000/oracle-juc</containerIdsLogging>
       </dockerCmd>
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
-    <com.nirima.jenkins.plugins.docker.builder.DockerBuilderControl plugin="docker-plugin@0.9.2">
-      <option class="com.nirima.jenkins.plugins.docker.builder.DockerBuilderControlOptionStop">
-        <cloudName></cloudName>
-        <containerId>$DOCKER_CONTAINER_IDS</containerId>
-        <remove>true</remove>
-      </option>
-    </com.nirima.jenkins.plugins.docker.builder.DockerBuilderControl>
+    <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.25">
+      <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.KillCommand">
+        <containerIds>oracle-juc</containerIds>
+      </dockerCmd>
+    </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
   </builders>
   <publishers/>
   <buildWrappers/>
