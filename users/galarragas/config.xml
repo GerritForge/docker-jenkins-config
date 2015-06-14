@@ -3,10 +3,12 @@
   <fullName>Stefano Galarraga</fullName>
   <properties>
     <hudson.model.PaneStatusProperties>
-      <collapsed/>
+      <collapsed>
+        <string></string>
+      </collapsed>
     </hudson.model.PaneStatusProperties>
     <jenkins.security.ApiTokenProperty>
-      <apiToken>iuugh+jNjh0FyD3JDh8NLw+vpj/rCBSPDObXRlm4wPHRU90NAZdNDcirOC1zQNUiZV14gq9v6lGd+1xodPnltqVtnhUIqjfQisAb3QyiGWXyQVKJMJ0gB4BpwY4J+tEtwX1II4cEttRJcVtpUF4g2Q/SXjDg4j2N4+t2yX7lixU=</apiToken>
+      <apiToken>d6p4V4A/8rsKuA717rYny9b+Gh5wsNSPTx6wMHDHIiM8UvKxIMSILJGN8ih1qviiWQQkDXcKIYxn6oaCyvNW4RTxHU9uMALouXCImW6jJV+ZCC8aep24T/5MSnKciVhCA6duoKhjtmvvUI6B/t9MUpZP81oerKP+RHBnd0cWbVTb9KBujjo2ubak5lvVAbHM3fx33G+fIOGOB6hDUwZWh9oaVkheddUWwJIGsE3dO0NJt9uDpss4txoSclkCOowz</apiToken>
     </jenkins.security.ApiTokenProperty>
     <com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty plugin="credentials@1.18">
       <domainCredentialsMap class="hudson.util.CopyOnWriteMap$Hash"/>
