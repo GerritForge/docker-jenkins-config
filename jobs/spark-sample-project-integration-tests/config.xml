@@ -29,6 +29,13 @@
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
+    <org.jvnet.hudson.plugins.SbtPluginBuilder plugin="sbt@1.5">
+      <name>sbt 0.13.8</name>
+      <jvmFlags></jvmFlags>
+      <sbtFlags>-Dsbt.log.noformat=true</sbtFlags>
+      <actions>assembly</actions>
+      <subdirPath></subdirPath>
+    </org.jvnet.hudson.plugins.SbtPluginBuilder>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.25">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.CreateContainerCommand">
         <image>mesos3.gerritforge.com:5000/oracle-juc</image>
