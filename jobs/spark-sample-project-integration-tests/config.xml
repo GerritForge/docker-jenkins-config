@@ -95,7 +95,8 @@ $WORKSPACE/src/test/resources /test/cfg</bindMounts>
       </dockerCmd>
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <hudson.tasks.Shell>
-      <command>#docker -H tcp://172.17.42.1:2375 ps
+      <command>sudo ls -la
+#docker -H tcp://172.17.42.1:2375 ps
 #docker exec -i $cdh -tls /bin/bash -c &quot;export SPARK_CLASSPATH=/root/spark-etl/extra-libs/ojdbc6.jar; ./root/spark-etl/src/test/scripts/CustomerCDCDataBaseImporterIT.sh /root/spark-etl oracle-juc&quot;
 </command>
     </hudson.tasks.Shell>
