@@ -70,8 +70,9 @@
         <waitPorts>oracle-juc 1521
 </waitPorts>
         <links></links>
-        <bindMounts>/var/jenkins_home/workspace/spark-sample-project-integration-tests2/data:/test/data
-/var/jenkins_home/workspace/spark-sample-project-integration-tests2/src/test/resources:/test/cfg</bindMounts>
+        <bindMounts>/var/jenkins_home/workspace/spark-sample-project-integration-tests2/data /test/data
+/var/jenkins_home/workspace/spark-sample-project-integration-tests2/src/test/resources /test/cfg
+</bindMounts>
         <privileged>false</privileged>
         <containerIdsLogging>mesos3.gerritforge.com:5000/oracle-juc</containerIdsLogging>
       </dockerCmd>
@@ -83,7 +84,7 @@
         <portBindings></portBindings>
         <waitPorts></waitPorts>
         <links>oracle-juc:oracle-juc</links>
-        <bindMounts>/var/jenkins_home/workspace/spark-sample-project-integration-tests2:/root/spark-etl</bindMounts>
+        <bindMounts>/var/jenkins_home/workspace/spark-sample-project-integration-tests2 /root/spark-etl</bindMounts>
         <privileged>false</privileged>
         <containerIdsLogging>cdh</containerIdsLogging>
       </dockerCmd>
