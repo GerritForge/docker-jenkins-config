@@ -110,6 +110,7 @@ sleep 120
 echo &quot;Starting spark job&quot;
 docker exec -i $CDH_CONTAINER bash -c  &quot;bash -x /root/spark-etl/src/test/scripts/CustomerCDCDataBaseImporterIT.sh /root/spark-etl oracle-juc&quot;
 
+
 </command>
     </hudson.tasks.Shell>
   </builders>
