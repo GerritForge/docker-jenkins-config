@@ -88,12 +88,12 @@ $WORKSPACE/src/test/resources /test/cfg</bindMounts>
         <containerIdsLogging></containerIdsLogging>
       </dockerCmd>
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
-    <hudson.tasks.Shell>
-      <command>export SPARK_CLASSPATH=/root/spark-etl/extra-libs/ojdbc6.jar
-
-./root/spark-etl/src/test/scripts/CustomerCDCDataBaseImporterIT.sh /root/spark-etl oracle-juc
-</command>
-    </hudson.tasks.Shell>
+    <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.25">
+      <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.ExecCreateCommand">
+        <containerIds>cdh</containerIds>
+        <command>export SPARK_CLASSPATH=/root/spark-etl/extra-libs/ojdbc6.jar; ./root/spark-etl/src/test/scripts/CustomerCDCDataBaseImporterIT.sh /root/spark-etl oracle-juc</command>
+      </dockerCmd>
+    </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
   </builders>
   <publishers>
     <com.nirima.jenkins.plugins.docker.publisher.DockerPublisherControl plugin="docker-plugin@0.9.2">
