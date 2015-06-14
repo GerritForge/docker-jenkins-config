@@ -57,12 +57,12 @@
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.25">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.StartCommand">
-        <containerIds>oracle-juc,cdh</containerIds>
+        <containerIds>oracle-juc</containerIds>
         <publishAllPorts>false</publishAllPorts>
         <portBindings></portBindings>
         <waitPorts>oracle-juc 1521
 </waitPorts>
-        <links>oracle-juc:oracle-juc</links>
+        <links></links>
         <bindMounts>$WORKSPACE/data /test/data
 $WORKSPACE/src/test/resources /test/cfg</bindMounts>
         <privileged>false</privileged>
