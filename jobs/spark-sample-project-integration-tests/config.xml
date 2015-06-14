@@ -31,7 +31,7 @@
   <builders>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.25">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.StartCommand">
-        <containerIds>mesos3.gerritforge.com:5000/oracle-juc</containerIds>
+        <containerIds>0c580473c562</containerIds>
         <publishAllPorts>false</publishAllPorts>
         <portBindings></portBindings>
         <waitPorts>1521</waitPorts>
