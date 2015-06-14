@@ -96,7 +96,7 @@ $WORKSPACE/src/test/resources /test/cfg</bindMounts>
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <hudson.tasks.Shell>
       <command>TERM=xterm
-DOCKER_HOST=&quot;http://188.165.175.129:4243&quot;
+export DOCKER_HOST=&quot;http://188.165.175.129:4243&quot;
 docker ps
 #docker exec -i $cdh -tls /bin/bash -c &quot;export SPARK_CLASSPATH=/root/spark-etl/extra-libs/ojdbc6.jar; ./root/spark-etl/src/test/scripts/CustomerCDCDataBaseImporterIT.sh /root/spark-etl oracle-juc&quot;
 </command>
