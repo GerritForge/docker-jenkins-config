@@ -70,6 +70,18 @@ $WORKSPACE/src/test/resources /test/cfg</bindMounts>
       </dockerCmd>
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.25">
+      <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.StartCommand">
+        <containerIds>cdh</containerIds>
+        <publishAllPorts>false</publishAllPorts>
+        <portBindings></portBindings>
+        <waitPorts></waitPorts>
+        <links>oracle-juc:oracle-juc</links>
+        <bindMounts>$WORKSPACE /root/spark-etl</bindMounts>
+        <privileged>false</privileged>
+        <containerIdsLogging></containerIdsLogging>
+      </dockerCmd>
+    </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
+    <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.25">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.KillCommand">
         <containerIds>oracle-juc,cdh</containerIds>
       </dockerCmd>
