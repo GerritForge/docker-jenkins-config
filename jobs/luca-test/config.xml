@@ -21,7 +21,7 @@
       <buildSteps>
         <hudson.tasks.Shell>
           <command>printenv 
-curl -v $BUILD_URL</command>
+curl -u lucamilanesio:8c70c476f1c7274910fa6890493ee213 -v $BUILD_URL</command>
         </hudson.tasks.Shell>
       </buildSteps>
       <scriptOnlyIfSuccess>false</scriptOnlyIfSuccess>
