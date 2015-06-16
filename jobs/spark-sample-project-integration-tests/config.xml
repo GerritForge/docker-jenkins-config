@@ -119,6 +119,17 @@ docker exec -i $CDH_CONTAINER bash -c  &quot;bash -x /root/spark-etl/src/test/sc
       <containerIds>cdh,oracle-juc</containerIds>
       <removeVolumes>false</removeVolumes>
     </org.jenkinsci.plugins.dockerbuildstep.DockerPostBuilder_-DockerPostBuildStep>
+    <org.jenkinsci.plugins.postbuildscript.PostBuildScript plugin="postbuildscript@0.17">
+      <buildSteps>
+        <hudson.tasks.Shell>
+          <command>COMMIT_ID=$(git log --format %H -1)
+ssh -p 29418 mesos1.gerritforge.com gerrit review --integrated +1</command>
+        </hudson.tasks.Shell>
+      </buildSteps>
+      <scriptOnlyIfSuccess>true</scriptOnlyIfSuccess>
+      <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
+      <markBuildUnstable>false</markBuildUnstable>
+    </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
   </publishers>
   <buildWrappers/>
 </project>
