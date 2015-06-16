@@ -13,7 +13,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>false &amp;&amp; echo succeeded</command>
+      <command>true &amp;&amp; echo succeeded</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
