@@ -124,6 +124,7 @@ docker exec -i $CDH_CONTAINER bash -c  &quot;bash -x /root/spark-etl/src/test/sc
         <hudson.tasks.Shell>
           <command>curl $BUILD_URL
 COMMIT_ID=$(git log --format=%H -1)
+curl -u $JENKINS_AUTH -v $BUILD_URL/api/json?pretty=true | jq -r &quot;.result&quot;
 ssh -p 29418 gerritforgebuild@mesos1.gerritforge.com gerrit review $COMMIT_ID --integrated +1</command>
         </hudson.tasks.Shell>
       </buildSteps>
