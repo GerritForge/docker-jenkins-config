@@ -120,14 +120,10 @@ docker exec -i $CDH_CONTAINER bash -c  &quot;bash -x /root/spark-etl/src/test/sc
       <removeVolumes>false</removeVolumes>
     </org.jenkinsci.plugins.dockerbuildstep.DockerPostBuilder_-DockerPostBuildStep>
     <org.jenkinsci.plugins.postbuildscript.PostBuildScript plugin="postbuildscript@0.17">
-      <groovyScriptContentList>
-        <org.jenkinsci.plugins.postbuildscript.GroovyScriptContent>
-          <content>println(build)</content>
-        </org.jenkinsci.plugins.postbuildscript.GroovyScriptContent>
-      </groovyScriptContentList>
       <buildSteps>
         <hudson.tasks.Shell>
-          <command>COMMIT_ID=$(git log --format=%H -1)
+          <command>curl $BUILD_URL
+COMMIT_ID=$(git log --format=%H -1)
 ssh -p 29418 gerritforgebuild@mesos1.gerritforge.com gerrit review $COMMIT_ID --integrated +1</command>
         </hudson.tasks.Shell>
       </buildSteps>
