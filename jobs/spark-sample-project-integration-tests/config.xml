@@ -122,9 +122,8 @@ docker exec -i $CDH_CONTAINER bash -c  &quot;bash -x /root/spark-etl/src/test/sc
     <org.jenkinsci.plugins.postbuildscript.PostBuildScript plugin="postbuildscript@0.17">
       <buildSteps>
         <hudson.tasks.Shell>
-          <command>printenv
-COMMIT_ID=$(git log --format=%H -1)
-ssh -p 29418 gerritforgebuild@mesos1.gerritforge.com gerrit review --integrated +1</command>
+          <command>COMMIT_ID=$(git log --format=%H -1)
+ssh -p 29418 gerritforgebuild@mesos1.gerritforge.com gerrit review $COMMIT_ID --integrated +1</command>
         </hudson.tasks.Shell>
       </buildSteps>
       <scriptOnlyIfSuccess>true</scriptOnlyIfSuccess>
