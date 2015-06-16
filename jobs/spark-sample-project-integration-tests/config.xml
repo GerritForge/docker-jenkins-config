@@ -136,6 +136,7 @@ docker exec -i $CDH_CONTAINER bash -c  &quot;bash -x /root/spark-etl/src/test/sc
 COMMIT_ID=$(git log --format=%H -1)
 BUILD_RESULT=$(curl -u $JENKINS_AUTH -v $BUILD_URL/api/json?pretty=true | jq -r &quot;.result&quot;)
 if [ &quot;$BUILD_RESULT&quot; == &quot;SUCCESS&quot; ]
+then
   INTEGRATED=+1
 else
   INTEGRATED=-1
