@@ -78,7 +78,7 @@
     <org.jvnet.hudson.plugins.SbtPluginBuilder plugin="sbt@1.5">
       <name>sbt 0.13.8</name>
       <jvmFlags></jvmFlags>
-      <sbtFlags>-Dsbt.log.noformat=true</sbtFlags>
+      <sbtFlags></sbtFlags>
       <actions>test</actions>
       <subdirPath></subdirPath>
     </org.jvnet.hudson.plugins.SbtPluginBuilder>
