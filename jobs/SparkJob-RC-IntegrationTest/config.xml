@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Final Integration for RC.</description>
+  <description></description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.model.ParametersDefinitionProperty>
@@ -51,7 +51,7 @@
         <image>mesos3.gerritforge.com:5000/oracle-juc</image>
         <command></command>
         <hostName></hostName>
-        <containerName>oracle-juc-rc-$BUILD_NUMBER</containerName>
+        <containerName>oracle-juc-$BUILD_NUMBER</containerName>
         <envVars></envVars>
         <links></links>
         <exposedPorts></exposedPorts>
@@ -64,7 +64,7 @@
         <image>mesos3.gerritforge.com:5000/cdh-juc</image>
         <command></command>
         <hostName></hostName>
-        <containerName>cdh-rc-$BUILD_NUMBER</containerName>
+        <containerName>cdh-$BUILD_NUMBER</containerName>
         <envVars>TERM=xterm</envVars>
         <links></links>
         <exposedPorts></exposedPorts>
@@ -74,7 +74,7 @@
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.25">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.StartCommand">
-        <containerIds>oracle-juc-rc-$BUILD_NUMBER</containerIds>
+        <containerIds>oracle-juc-$BUILD_NUMBER</containerIds>
         <publishAllPorts>false</publishAllPorts>
         <portBindings></portBindings>
         <waitPorts>oracle-juc-$BUILD_NUMBER 1521
@@ -89,7 +89,7 @@
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.25">
       <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.StartCommand">
-        <containerIds>cdh-rc-$BUILD_NUMBER</containerIds>
+        <containerIds>cdh-$BUILD_NUMBER</containerIds>
         <publishAllPorts>false</publishAllPorts>
         <portBindings></portBindings>
         <waitPorts>cdh-$BUILD_NUMBER 25020</waitPorts>
@@ -111,14 +111,15 @@ export DOCKER_HOST=&quot;tcp://188.165.175.129:4243&quot;
 #ORACLE_CONTAINER=$(docker ps | grep oracle-juc-$BUILD_NUMBER | awk &apos;{ print $1 }&apos;)
 
 echo &quot;Initializing DB with test data&quot;
-docker exec -i oracle-juc-rc-$BUILD_NUMBER \
+docker exec -i oracle-juc-$BUILD_NUMBER \
     bash -c &apos;export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe;export ORACLE_SID=XE;echo exit |  /u01/app/oracle/product/11.2.0/xe/bin/sqlplus system/oracle  @/test/cfg/InitCustomer.sql&apos;
 
 #Workarounding the problem with the Wait For Port timing out before CDH Docker is fully up
 sleep 120
 
+
 echo &quot;Starting spark job&quot;
-docker exec -i cdh-juc-rc-$BUILD_NUMBER bash -c  &quot;bash -x /root/spark-etl/src/test/scripts/CustomerCDCDataBaseImporterIT.sh /root/spark-etl oracle-juc&quot;
+docker exec -i cdh-juc-$BUILD_NUMBER bash -c  &quot;bash -x /root/spark-etl/src/test/scripts/CustomerCDCDataBaseImporterIT.sh /root/spark-etl oracle-juc&quot;
 
 
 </command>
