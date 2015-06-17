@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Final Integration for RC</description>
+  <description>Final Integration for RC.</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.model.ParametersDefinitionProperty>
@@ -116,7 +116,6 @@ docker exec -i oracle-juc-rc-$BUILD_NUMBER \
 
 #Workarounding the problem with the Wait For Port timing out before CDH Docker is fully up
 sleep 120
-
 
 echo &quot;Starting spark job&quot;
 docker exec -i cdh-juc-rc-$BUILD_NUMBER bash -c  &quot;bash -x /root/spark-etl/src/test/scripts/CustomerCDCDataBaseImporterIT.sh /root/spark-etl oracle-juc&quot;
