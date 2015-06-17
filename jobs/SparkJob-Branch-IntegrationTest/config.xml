@@ -127,7 +127,7 @@ docker exec -i cdh-juc-$BUILD_NUMBER bash -c  &quot;bash -x /root/spark-etl/src/
   </builders>
   <publishers>
     <org.jenkinsci.plugins.dockerbuildstep.DockerPostBuilder_-DockerPostBuildStep plugin="docker-build-step@1.25">
-      <containerIds>cdh,oracle-juc</containerIds>
+      <containerIds>cdh-$BUILD_NUMBER,oracle-juc-$BUILD_NUMBER</containerIds>
       <removeVolumes>false</removeVolumes>
     </org.jenkinsci.plugins.dockerbuildstep.DockerPostBuilder_-DockerPostBuildStep>
     <org.jenkinsci.plugins.postbuildscript.PostBuildScript plugin="postbuildscript@0.17">
