@@ -126,9 +126,7 @@ docker exec -i cdh-$BUILD_NUMBER bash -c  &quot;bash -x /root/spark-etl/src/test
     <org.jenkinsci.plugins.postbuildscript.PostBuildScript plugin="postbuildscript@0.17">
       <buildSteps>
         <hudson.tasks.Shell>
-          <command>printenv
-curl $BUILD_URL
-COMMIT_ID=$(git log --format=%H -1)
+          <command>COMMIT_ID=$(git log --format=%H -1)
 BUILD_RESULT=$(curl -u $JENKINS_AUTH -v $BUILD_URL/api/json?pretty=true | jq -r &quot;.result&quot;)
 if [ &quot;$BUILD_RESULT&quot;==&quot;SUCCESS&quot; ]
 then
