@@ -6,7 +6,7 @@
       <collapsed/>
     </hudson.model.PaneStatusProperties>
     <jenkins.security.ApiTokenProperty>
-      <apiToken>1+byrx+XRbk2UcEmSJFU7/qyWJ1KiNqcGys4iLELcCx/NA+eaVcwETBNsWwcQG4lj/37WtJdoJM0h3vmEoTLjUmJTrb0tTXp4VN8+YJ98KArERBjBkutar3/p231mvoQpWhPq1RyPLOo/w26hpR5qJSVR7kjnut17nWqaXLl1YFaDeWIQwlBwCu70LEW8lmXoUsgQaYR8RxyOGYeQyaNpoel6gPk1jKiJB8qSorXVhYMdfbB2BnKCjZTeNN2Qnxu7gX2J4ge8Ho/9TaxLcUZCQqaLOSRD3cnRTxJ9Ihy+1LukDk5OLKMpvvsQeyWiHSHcIQa2u1dr/cewTD/iLwP5SOxjTgtClBhJP5MIcHanfQ=</apiToken>
+      <apiToken>ZV5FPW0dYpB0Of4G+MkZoSBk9/9S8GhiT7U124zkxuOEA8lMIHB4AKpfgnGVPtOpIRYYivHufa0mK2+8gF6Wg0slNjkI/1/LECU/8uttXBb3Dv+9XhSXLPk57asXfFnbd9X+0lACfWhQu2zgKZtqkA4jiWGHQ9PdshgDINe14RC+vUAbRUKvsEQ3jzFUA1+osariCrAEbkqgfoLH6NykJ81aJmfB9rvM4iDmAB0S3NYwWcy4YXXdoOQscibfHyVjPUvE8M1hmOeHtSxhULda0+Veg33uvdBycPrmUAz4l739IVHqs7sp8TnH4ZIpF+xZZMr2qdpM6wzVlsMJDEhhPdsDPfj4kRFH+RUfmW0If2xb5zoDGW6ZzTNUSCMFcTeNdjXOLIsL+oGLuXQx52XhaPKiz536OzA7QccMyt/PCB8UrHeIrQ0m/Sm9u4JPUMGQ3gREbEKQPRzm7mjs+hJQr67WnmGm3ERPCmKahPl/yWmL7OQ19bNutJ7IXEBiYOEc</apiToken>
     </jenkins.security.ApiTokenProperty>
     <com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty plugin="credentials@1.18">
       <domainCredentialsMap class="hudson.util.CopyOnWriteMap$Hash"/>
