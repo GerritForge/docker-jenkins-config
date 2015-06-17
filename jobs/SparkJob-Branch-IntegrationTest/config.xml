@@ -139,7 +139,7 @@ fi
 ssh -p 29418 gerritforgebuild@mesos1.gerritforge.com gerrit review $COMMIT_ID --integrated $INTEGRATED</command>
         </hudson.tasks.Shell>
       </buildSteps>
-      <scriptOnlyIfSuccess>true</scriptOnlyIfSuccess>
+      <scriptOnlyIfSuccess>false</scriptOnlyIfSuccess>
       <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
       <markBuildUnstable>false</markBuildUnstable>
     </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
