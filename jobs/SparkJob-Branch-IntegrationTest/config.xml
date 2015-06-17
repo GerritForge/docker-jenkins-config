@@ -80,8 +80,8 @@
         <waitPorts>oracle-juc-$BUILD_NUMBER 1521
 </waitPorts>
         <links></links>
-        <bindMounts>/docker/jenkins-master/workspace/spark-sample-project-integration-tests/data /test/data
-/docker/jenkins-master/workspace/spark-sample-project-integration-tests/src/test/resources /test/cfg
+        <bindMounts>/docker/jenkins-master/workspace/$JOB_NAME/data /test/data
+/docker/jenkins-master/workspace/$JOB_NAME/src/test/resources /test/cfg
 </bindMounts>
         <privileged>false</privileged>
         <containerIdsLogging>oracle-juc-$BUILD_NUMBER</containerIdsLogging>
@@ -94,7 +94,7 @@
         <portBindings></portBindings>
         <waitPorts>cdh-$BUILD_NUMBER 25020</waitPorts>
         <links>oracle-juc-$BUILD_NUMBER:oracle-juc</links>
-        <bindMounts>/docker/jenkins-master/workspace/spark-sample-project-integration-tests /root/spark-etl
+        <bindMounts>/docker/jenkins-master/workspace/$JOB_NAME /root/spark-etl
 </bindMounts>
         <privileged>false</privileged>
         <containerIdsLogging>cdh-$BUILD_NUMBER</containerIdsLogging>
