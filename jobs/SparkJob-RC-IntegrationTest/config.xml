@@ -1,8 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Final Integration for RC&#xd;
-&lt;&gt;</description>
+  <description>Final Integration for RC 2</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <hudson.model.ParametersDefinitionProperty>
@@ -81,8 +80,8 @@
         <waitPorts>oracle-juc-$BUILD_NUMBER 1521
 </waitPorts>
         <links></links>
-        <bindMounts>/docker/jenkins-master/workspace/spark-sample-project-integration-tests/data /test/data
-/docker/jenkins-master/workspace/spark-sample-project-integration-tests/src/test/resources /test/cfg
+        <bindMounts>/docker/jenkins-master/workspace/$JOB_NAME/data /test/data
+/docker/jenkins-master/workspace/$JOB_NAME/src/test/resources /test/cfg
 </bindMounts>
         <privileged>false</privileged>
         <containerIdsLogging>oracle-juc-$BUILD_NUMBER</containerIdsLogging>
@@ -116,7 +115,7 @@ docker exec -i oracle-juc-rc-$BUILD_NUMBER \
     bash -c &apos;export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe;export ORACLE_SID=XE;echo exit |  /u01/app/oracle/product/11.2.0/xe/bin/sqlplus system/oracle  @/test/cfg/InitCustomer.sql&apos;
 
 #Workarounding the problem with the Wait For Port timing out before CDH Docker is fully up
-sleep 120
+sleep 120 
 
 echo &quot;Starting spark job&quot;
 docker exec -i cdh-juc-rc-$BUILD_NUMBER bash -c  &quot;bash -x /root/spark-etl/src/test/scripts/CustomerCDCDataBaseImporterIT.sh /root/spark-etl oracle-juc&quot;
@@ -127,7 +126,7 @@ docker exec -i cdh-juc-rc-$BUILD_NUMBER bash -c  &quot;bash -x /root/spark-etl/s
   </builders>
   <publishers>
     <org.jenkinsci.plugins.dockerbuildstep.DockerPostBuilder_-DockerPostBuildStep plugin="docker-build-step@1.25">
-      <containerIds>cdh,oracle-juc</containerIds>
+      <containerIds>cdh-rc-$BUILD_NUMBER,oracle-juc-rc-$BUILD_NUMBER</containerIds>
       <removeVolumes>false</removeVolumes>
     </org.jenkinsci.plugins.dockerbuildstep.DockerPostBuilder_-DockerPostBuildStep>
   </publishers>
