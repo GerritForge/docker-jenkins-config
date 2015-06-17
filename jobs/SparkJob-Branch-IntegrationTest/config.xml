@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>JENKINS_AUTH</name>
+          <description>Username:Password to authenticate to Jenkins from this job</description>
+          <defaultValue>lucamilanesio:8c70c476f1c7274910fa6890493ee213</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.3.5">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <name>Gerrit Changes</name>
+        <refspec>+refs/changes/*:refs/remotes/origin/*</refspec>
+        <url>ssh://gerritforgebuild@mesos1.gerritforge.com:29418/GerritForge/spark-etl-demo.git</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>*/master</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions/>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <org.jvnet.hudson.plugins.SbtPluginBuilder plugin="sbt@1.5">
+      <name>sbt 0.13.8</name>
+      <jvmFlags></jvmFlags>
+      <sbtFlags>-Dsbt.log.noformat=true</sbtFlags>
+      <actions>assembly</actions>
+      <subdirPath></subdirPath>
+    </org.jvnet.hudson.plugins.SbtPluginBuilder>
+    <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.25">
+      <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.CreateContainerCommand">
+        <image>mesos3.gerritforge.com:5000/oracle-juc</image>
+        <command></command>
+        <hostName></hostName>
+        <containerName>oracle-juc-$BUILD_NUMBER</containerName>
+        <envVars></envVars>
+        <links></links>
+        <exposedPorts></exposedPorts>
+        <cpuShares></cpuShares>
+        <memoryLimit></memoryLimit>
+      </dockerCmd>
+    </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
+    <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.25">
+      <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.CreateContainerCommand">
+        <image>mesos3.gerritforge.com:5000/cdh-juc</image>
+        <command></command>
+        <hostName></hostName>
+        <containerName>cdh-$BUILD_NUMBER</containerName>
+        <envVars>TERM=xterm</envVars>
+        <links></links>
+        <exposedPorts></exposedPorts>
+        <cpuShares></cpuShares>
+        <memoryLimit></memoryLimit>
+      </dockerCmd>
+    </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
+    <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.25">
+      <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.StartCommand">
+        <containerIds>oracle-juc-$BUILD_NUMBER</containerIds>
+        <publishAllPorts>false</publishAllPorts>
+        <portBindings></portBindings>
+        <waitPorts>oracle-juc-$BUILD_NUMBER 1521
+</waitPorts>
+        <links></links>
+        <bindMounts>/docker/jenkins-master/workspace/spark-sample-project-integration-tests/data /test/data
+/docker/jenkins-master/workspace/spark-sample-project-integration-tests/src/test/resources /test/cfg
+</bindMounts>
+        <privileged>false</privileged>
+        <containerIdsLogging>oracle-juc-$BUILD_NUMBER</containerIdsLogging>
+      </dockerCmd>
+    </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
+    <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.25">
+      <dockerCmd class="org.jenkinsci.plugins.dockerbuildstep.cmd.StartCommand">
+        <containerIds>cdh-$BUILD_NUMBER</containerIds>
+        <publishAllPorts>false</publishAllPorts>
+        <portBindings></portBindings>
+        <waitPorts>cdh-$BUILD_NUMBER 25020</waitPorts>
+        <links>oracle-juc-$BUILD_NUMBER:oracle-juc</links>
+        <bindMounts>/docker/jenkins-master/workspace/spark-sample-project-integration-tests /root/spark-etl
+</bindMounts>
+        <privileged>false</privileged>
+        <containerIdsLogging>cdh-$BUILD_NUMBER</containerIdsLogging>
+      </dockerCmd>
+    </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
+    <hudson.tasks.Shell>
+      <command>TERM=xterm
+
+echo &quot;Docker IDs: &quot; $DOCKER_CONTAINER_IDS 
+
+export DOCKER_HOST=&quot;tcp://188.165.175.129:4243&quot;
+
+#CDH_CONTAINER=$(docker ps | grep cdh-juc-$BUILD_NUMBER | awk &apos;{ print $1 }&apos;)
+#ORACLE_CONTAINER=$(docker ps | grep oracle-juc-$BUILD_NUMBER | awk &apos;{ print $1 }&apos;)
+
+echo &quot;Initializing DB with test data&quot;
+docker exec -i oracle-juc-$BUILD_NUMBER \
+    bash -c &apos;export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe;export ORACLE_SID=XE;echo exit |  /u01/app/oracle/product/11.2.0/xe/bin/sqlplus system/oracle  @/test/cfg/InitCustomer.sql&apos;
+
+#Workarounding the problem with the Wait For Port timing out before CDH Docker is fully up
+sleep 120
+
+
+echo &quot;Starting spark job&quot;
+docker exec -i cdh-juc-$BUILD_NUMBER bash -c  &quot;bash -x /root/spark-etl/src/test/scripts/CustomerCDCDataBaseImporterIT.sh /root/spark-etl oracle-juc&quot;
+
+
+</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <org.jenkinsci.plugins.dockerbuildstep.DockerPostBuilder_-DockerPostBuildStep plugin="docker-build-step@1.25">
+      <containerIds>cdh,oracle-juc</containerIds>
+      <removeVolumes>false</removeVolumes>
+    </org.jenkinsci.plugins.dockerbuildstep.DockerPostBuilder_-DockerPostBuildStep>
+    <org.jenkinsci.plugins.postbuildscript.PostBuildScript plugin="postbuildscript@0.17">
+      <buildSteps>
+        <hudson.tasks.Shell>
+          <command>curl $BUILD_URL
+COMMIT_ID=$(git log --format=%H -1)
+BUILD_RESULT=$(curl -u $JENKINS_AUTH -v $BUILD_URL/api/json?pretty=true | jq -r &quot;.result&quot;)
+if [ &quot;$BUILD_RESULT&quot;==&quot;SUCCESS&quot; ]
+then
+  INTEGRATED=+1
+else
+  INTEGRATED=-1
+fi
+ssh -p 29418 gerritforgebuild@mesos1.gerritforge.com gerrit review $COMMIT_ID --integrated $INTEGRATED</command>
+        </hudson.tasks.Shell>
+      </buildSteps>
+      <scriptOnlyIfSuccess>true</scriptOnlyIfSuccess>
+      <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
+      <markBuildUnstable>false</markBuildUnstable>
+    </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
+  </publishers>
+  <buildWrappers/>
+</project>
