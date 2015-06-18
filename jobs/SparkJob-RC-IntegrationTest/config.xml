@@ -93,12 +93,12 @@
         <containerIds>cdh-rc-$BUILD_NUMBER</containerIds>
         <publishAllPorts>false</publishAllPorts>
         <portBindings></portBindings>
-        <waitPorts>cdh-$BUILD_NUMBER 25020</waitPorts>
+        <waitPorts>cdh-rc-$BUILD_NUMBER 25020</waitPorts>
         <links>oracle-juc-rc-$BUILD_NUMBER:oracle-juc</links>
         <bindMounts>/docker/jenkins-master/workspace/$JOB_NAME /root/spark-etl
 </bindMounts>
         <privileged>false</privileged>
-        <containerIdsLogging>cdh-$BUILD_NUMBER</containerIdsLogging>
+        <containerIdsLogging>cdh-rc-$BUILD_NUMBER</containerIdsLogging>
       </dockerCmd>
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <hudson.tasks.Shell>
