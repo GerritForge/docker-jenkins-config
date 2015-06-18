@@ -94,7 +94,7 @@
         <publishAllPorts>false</publishAllPorts>
         <portBindings></portBindings>
         <waitPorts>cdh-$BUILD_NUMBER 25020</waitPorts>
-        <links>oracle-juc-$BUILD_NUMBER:oracle-juc</links>
+        <links>oracle-juc-rc-$BUILD_NUMBER:oracle-juc</links>
         <bindMounts>/docker/jenkins-master/workspace/$JOB_NAME /root/spark-etl
 </bindMounts>
         <privileged>false</privileged>
