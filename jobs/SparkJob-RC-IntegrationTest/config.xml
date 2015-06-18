@@ -78,14 +78,14 @@
         <containerIds>oracle-juc-rc-$BUILD_NUMBER</containerIds>
         <publishAllPorts>false</publishAllPorts>
         <portBindings></portBindings>
-        <waitPorts>oracle-juc-$BUILD_NUMBER 1521
+        <waitPorts>oracle-juc-rc-$BUILD_NUMBER 1521
 </waitPorts>
         <links></links>
         <bindMounts>/docker/jenkins-master/workspace/$JOB_NAME/data /test/data
 /docker/jenkins-master/workspace/$JOB_NAME/src/test/resources /test/cfg
 </bindMounts>
         <privileged>false</privileged>
-        <containerIdsLogging>oracle-juc-$BUILD_NUMBER</containerIdsLogging>
+        <containerIdsLogging>oracle-juc-rc-$BUILD_NUMBER</containerIdsLogging>
       </dockerCmd>
     </org.jenkinsci.plugins.dockerbuildstep.DockerBuilder>
     <org.jenkinsci.plugins.dockerbuildstep.DockerBuilder plugin="docker-build-step@1.25">
