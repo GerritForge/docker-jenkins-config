@@ -20,7 +20,7 @@
       <hudson.plugins.git.UserRemoteConfig>
         <name>Gerrit Changes</name>
         <refspec>+refs/changes/*:refs/remotes/origin/*</refspec>
-        <url>ssh://gerritforgebuild@mesos1.gerritforge.com:29418/GerritForge/spark-etl-demo.git</url>
+        <url>ssh://juc-jenkins-build@mesos1.gerritforge.com:29418/GerritForge/spark-etl-demo.git</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
