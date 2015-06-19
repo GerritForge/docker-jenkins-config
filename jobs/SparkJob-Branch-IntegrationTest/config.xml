@@ -134,7 +134,7 @@ then
 else
   INTEGRATED=-1
 fi
-ssh -p 29418 gerritforgebuild@mesos1.gerritforge.com gerrit review $COMMIT_ID --integrated $INTEGRATED</command>
+ssh -p 29418 juc-jenkins-build@mesos1.gerritforge.com gerrit review $COMMIT_ID --integrated $INTEGRATED</command>
         </hudson.tasks.Shell>
       </buildSteps>
       <scriptOnlyIfSuccess>false</scriptOnlyIfSuccess>
