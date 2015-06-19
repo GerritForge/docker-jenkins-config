@@ -127,7 +127,7 @@ docker exec -i cdh-$BUILD_NUMBER bash -c  &quot;bash -x /root/spark-etl/src/test
       <buildSteps>
         <hudson.tasks.Shell>
           <command>COMMIT_ID=$(git log --format=%H -1)
-BUILD_RESULT=$(curl -u $JENKINS_AUTH -v http://127.0.0.1:8081/job/$JOB_NAME/$BUILD_NUMBER/api/json?pretty=true | jq -r &quot;.result&quot;)
+BUILD_RESULT=$(curl -u $JENKINS_AUTH -v http://127.0.0.1:8080/job/$JOB_NAME/$BUILD_NUMBER/api/json?pretty=true | jq -r &quot;.result&quot;)
 if [ &quot;$BUILD_RESULT&quot; == &quot;SUCCESS&quot; ]
 then
   INTEGRATED=+1
