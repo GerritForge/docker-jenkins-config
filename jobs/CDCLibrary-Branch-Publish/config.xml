@@ -9,7 +9,7 @@
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
         <refspec>$GERRIT_REFSPEC</refspec>
-        <url>ssh://juc-jenkins-build@mesos1.gerritforge.com:29418/GerritForge/spark-etl-demo.git</url>
+        <url>ssh://juc-jenkins-build@mesos1.gerritforge.com:29418/GerritForge/spark-cdc-library.git</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
