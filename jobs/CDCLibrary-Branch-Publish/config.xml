@@ -34,7 +34,7 @@
       <gerritProjects>
         <com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.data.GerritProject>
           <compareType>PLAIN</compareType>
-          <pattern>GerritForge/spark-etl-demo</pattern>
+          <pattern>GerritForge/spark-cdc-library</pattern>
           <branches>
             <com.sonyericsson.hudson.plugins.gerrit.trigger.hudsontrigger.data.Branch>
               <compareType>ANT</compareType>
@@ -82,7 +82,7 @@
       <name>sbt 0.13.8</name>
       <jvmFlags></jvmFlags>
       <sbtFlags></sbtFlags>
-      <actions>test</actions>
+      <actions>test, publishLocal</actions>
       <subdirPath></subdirPath>
     </org.jvnet.hudson.plugins.SbtPluginBuilder>
   </builders>
@@ -95,7 +95,7 @@
               <combineQueuedCommits>false</combineQueuedCommits>
             </hudson.plugins.git.GitRevisionBuildParameters>
           </configs>
-          <projects>SparkJob-Branch-IntegrationTest,</projects>
+          <projects>SparkJob-Branch-UnitTest,</projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
