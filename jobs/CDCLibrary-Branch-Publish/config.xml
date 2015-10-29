@@ -96,7 +96,6 @@ import hudson.console.HyperlinkNote
 import java.util.concurrent.CancellationException
 import groovy.json.*
 
-def sha1 = &quot;f1b038810a162ed097c18185a6c0c6e5b20fba18&quot;
 def jsonSlurper = new JsonSlurper()
 
 def gerrit = &quot;http://juc-gerrit.gerritforge.com&quot;
@@ -105,15 +104,15 @@ def topicJson = jsonSlurper.parseText(topic)
 
 println topicJson
 
-def change = new URL(gerrit + &quot;/changes/&quot; + topicJson[0]._number + &quot;/detail?pp=0&quot;).getText().split(&quot;\n&quot;)[1]
+def change = new URL(gerrit + &quot;/changes/&quot; + topicJson[0]._number + &quot;/detail?o=CURRENT_REVISION&amp;pp=0&quot;).getText().split(&quot;\n&quot;)[1]
 def changeJson = jsonSlurper.parseText(change)
 
-println changeJson
+println changeJson.current_revision
 
 def job = Hudson.instance.getJob(&apos;SparkJob-Branch-ChainedTest&apos;)
 
 def params = [
-      new StringParameterValue(&apos;GERRIT_PATCHSET_REVISION&apos;, sha1),
+      new StringParameterValue(&apos;GERRIT_PATCHSET_REVISION&apos;, changeJson.current_revision),
     ]
 def anotherBuild
 
