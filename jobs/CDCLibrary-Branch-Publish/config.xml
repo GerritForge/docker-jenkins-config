@@ -94,13 +94,17 @@
 import hudson.AbortException
 import hudson.console.HyperlinkNote
 import java.util.concurrent.CancellationException
+import groovy.json.*
 
 def sha1 = &quot;f1b038810a162ed097c18185a6c0c6e5b20fba18&quot;
 
 def gerrit = &quot;http://juc-gerrit.gerritforge.com&quot;
-def topic = new URL(gerrit + &quot;/changes/?q=status:open+project:GerritForge/spark-etl-demo+topic:feature-1&quot;).getText()
+def topic = new URL(gerrit + &quot;/changes/?q=status:open+project:GerritForge/spark-etl-demo+topic:feature-1&amp;pp=0&quot;).getText().split(&quot;\n&quot;)[1]
 
-println topic
+def jsonSlurper = new JsonSlurper()
+def object = jsonSlurper.parseText(topic)
+
+println object
 
 def job = Hudson.instance.getJob(&apos;SparkJob-Branch-ChainedTest&apos;)
 
@@ -109,15 +113,8 @@ def params = [
     ]
 def anotherBuild
 
-try {
-
-def future = job.scheduleBuild2(0, new Cause.UpstreamCause(build), new ParametersAction(params))
-    println &quot;Waiting for the completion of &quot; + HyperlinkNote.encodeTo(&apos;/&apos; + job.url, job.fullDisplayName)
-    anotherBuild = future.get()
-} catch (CancellationException x) {
-    throw new AbortException(&quot;${job.fullDisplayName} aborted.&quot;)
-}
-println HyperlinkNote.encodeTo(&apos;/&apos; + anotherBuild.url, anotherBuild.fullDisplayName) + &quot; completed. Result was &quot; + anotherBuild.result
+job.scheduleBuild2(0, new ParametersAction(params))
+println &quot;Triggered job &quot; + HyperlinkNote.encodeTo(&apos;/&apos; + job.url, job.fullDisplayName)
 
 
 </content>
