@@ -90,7 +90,32 @@
     <org.jenkinsci.plugins.postbuildscript.PostBuildScript plugin="postbuildscript@0.17">
       <groovyScriptContentList>
         <org.jenkinsci.plugins.postbuildscript.GroovyScriptContent>
-          <content>def sha1 = &quot;f1b038810a162ed097c18185a6c0c6e5b20fba18&quot;</content>
+          <content>import hudson.model.*
+import hudson.AbortException
+import hudson.console.HyperlinkNote
+import java.util.concurrent.CancellationException
+
+def sha1 = &quot;f1b038810a162ed097c18185a6c0c6e5b20fba18&quot;
+
+def job = Hudson.instance.getJob(&apos;SparkJob-Branch-ChainedTest&apos;)
+
+def params = [
+      new StringParameterValue(&apos;GERRIT_PATCHSET_REVISION&apos;, sha1),
+    ]
+def anotherBuild
+
+try {
+
+def future = job.scheduleBuild2(0, new Cause.UpstreamCause(build), new ParametersAction(params))
+    println &quot;Waiting for the completion of &quot; + HyperlinkNote.encodeTo(&apos;/&apos; + job.url, job.fullDisplayName)
+    anotherBuild = future.get()
+} catch (CancellationException x) {
+    throw new AbortException(&quot;${job.fullDisplayName} aborted.&quot;)
+}
+println HyperlinkNote.encodeTo(&apos;/&apos; + anotherBuild.url, anotherBuild.fullDisplayName) + &quot; completed. Result was &quot; + anotherBuild.result
+
+
+</content>
         </org.jenkinsci.plugins.postbuildscript.GroovyScriptContent>
       </groovyScriptContentList>
       <scriptOnlyIfSuccess>true</scriptOnlyIfSuccess>
