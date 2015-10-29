@@ -105,7 +105,7 @@ def topicJson = jsonSlurper.parseText(topic)
 
 println topicJson
 
-def change = new URL(gerrit + &quot;/changes/&quot; + topicJson[0]._number + &quot;/detail&amp;pp=0&quot;).getText().split(&quot;\n&quot;)[1]
+def change = new URL(gerrit + &quot;/changes/&quot; + topicJson[0]._number + &quot;/detail?pp=0&quot;).getText().split(&quot;\n&quot;)[1]
 def changeJson = jsonSlurper.parseText(change)
 
 println changeJson
