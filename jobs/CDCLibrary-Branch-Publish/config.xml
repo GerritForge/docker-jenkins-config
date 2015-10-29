@@ -116,10 +116,20 @@ def params = [
     ]
 def anotherBuild
 
-job.scheduleBuild2(0, new ParametersAction(params))
-println &quot;Triggered job &quot; + HyperlinkNote.encodeTo(&apos;/&apos; + job.url, job.fullDisplayName)
+try {
+	def future = job.scheduleBuild2(0, new ParametersAction(params))
+	println &quot;Triggered job &quot; + HyperlinkNote.encodeTo(&apos;/&apos; + job.url, job.fullDisplayName)
+    anotherBuild = future.get()
+} catch (CancellationException x) {
+    throw new AbortException(&quot;${job.fullDisplayName} aborted.&quot;)
+}
+println HyperlinkNote.encodeTo(&apos;/&apos; + anotherBuild.url, anotherBuild.fullDisplayName) + &quot; completed. Result was &quot; + anotherBuild.result
 
-
+// Check that it succeeded
+if (anotherBuild.result != Result.SUCCESS &amp;&amp; anotherBuild.result != Result.UNSTABLE) {
+    // We abort this build right here and now.
+    throw new AbortException(&quot;${anotherBuild.fullDisplayName} failed.&quot;)
+}
 </content>
         </org.jenkinsci.plugins.postbuildscript.GroovyScriptContent>
       </groovyScriptContentList>
