@@ -106,7 +106,7 @@ def anotherBuild
 
 try {
 
-def future = job.scheduleBuild2(0, new Cause.UpstreamCause(build), new ParametersAction(params))
+def future = job.scheduleBuild2(0, new ParametersAction(params))
     println &quot;Waiting for the completion of &quot; + HyperlinkNote.encodeTo(&apos;/&apos; + job.url, job.fullDisplayName)
     anotherBuild = future.get()
 } catch (CancellationException x) {
