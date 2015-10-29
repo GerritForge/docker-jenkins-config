@@ -104,15 +104,9 @@ def params = [
     ]
 def anotherBuild
 
-try {
-
 def future = job.scheduleBuild2(0, new ParametersAction(params))
-    println &quot;Waiting for the completion of &quot; + HyperlinkNote.encodeTo(&apos;/&apos; + job.url, job.fullDisplayName)
-    anotherBuild = future.get()
-} catch (CancellationException x) {
-    throw new AbortException(&quot;${job.fullDisplayName} aborted.&quot;)
-}
-println HyperlinkNote.encodeTo(&apos;/&apos; + anotherBuild.url, anotherBuild.fullDisplayName) + &quot; completed. Result was &quot; + anotherBuild.result
+    println &quot;Triggered Job &quot; + HyperlinkNote.encodeTo(&apos;/&apos; + job.url, job.fullDisplayName)
+
 
 
 </content>
