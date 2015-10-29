@@ -87,20 +87,16 @@
     </org.jvnet.hudson.plugins.SbtPluginBuilder>
   </builders>
   <publishers>
-    <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.26">
-      <configs>
-        <hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
-          <configs>
-            <hudson.plugins.git.GitRevisionBuildParameters plugin="git@2.3.5">
-              <combineQueuedCommits>false</combineQueuedCommits>
-            </hudson.plugins.git.GitRevisionBuildParameters>
-          </configs>
-          <projects>SparkJob-Branch-UnitTest,</projects>
-          <condition>SUCCESS</condition>
-          <triggerWithNoParameters>false</triggerWithNoParameters>
-        </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
-      </configs>
-    </hudson.plugins.parameterizedtrigger.BuildTrigger>
+    <org.jenkinsci.plugins.postbuildscript.PostBuildScript plugin="postbuildscript@0.17">
+      <groovyScriptContentList>
+        <org.jenkinsci.plugins.postbuildscript.GroovyScriptContent>
+          <content>def sha1 = &quot;f1b038810a162ed097c18185a6c0c6e5b20fba18&quot;</content>
+        </org.jenkinsci.plugins.postbuildscript.GroovyScriptContent>
+      </groovyScriptContentList>
+      <scriptOnlyIfSuccess>true</scriptOnlyIfSuccess>
+      <scriptOnlyIfFailure>false</scriptOnlyIfFailure>
+      <markBuildUnstable>false</markBuildUnstable>
+    </org.jenkinsci.plugins.postbuildscript.PostBuildScript>
   </publishers>
   <buildWrappers>
     <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.4.1">
