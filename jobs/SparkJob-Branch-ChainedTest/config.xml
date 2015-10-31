@@ -48,9 +48,6 @@
       <actions>test</actions>
       <subdirPath></subdirPath>
     </org.jvnet.hudson.plugins.SbtPluginBuilder>
-    <hudson.tasks.Shell>
-      <command>exit -1</command>
-    </hudson.tasks.Shell>
   </builders>
   <publishers/>
   <buildWrappers>
