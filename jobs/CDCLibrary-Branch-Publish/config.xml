@@ -108,7 +108,7 @@ def gerrit = &quot;http://juc-gerrit.gerritforge.com&quot;
 
 def currentChangeInfo = new URL(gerrit + &quot;/changes/?q=project:GerritForge/spark-cdc-library&amp;O=81&amp;pp=0&amp;n=&quot; + changeNumber).getText().split(&quot;\n&quot;)[1]
 
-def currentChangeInfoJson = jsonSlurper.parseText(currentChangeInfo).find(_._number.toString == changeNumber)
+def currentChangeInfoJson = jsonSlurper.parseText(currentChangeInfo).find { it._number.toString == changeNumber }
 
 println &quot;Current change info are &quot; + currentChangeInfoJson
 
