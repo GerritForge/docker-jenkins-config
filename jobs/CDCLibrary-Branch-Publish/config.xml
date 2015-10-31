@@ -98,8 +98,17 @@ import groovy.json.*
 
 def jsonSlurper = new JsonSlurper()
 
+def patchsetRevision = System.getenv()[&quot;GERRIT_PATCHSET_REVISION&quot;]
+println &quot;Gerrit revision is &quot; + patchsetRevision
+
 def gerrit = &quot;http://juc-gerrit.gerritforge.com&quot;
-def topic = new URL(gerrit + &quot;/changes/?q=status:open+project:GerritForge/spark-etl-demo+topic:feature-1&amp;pp=0&quot;).getText().split(&quot;\n&quot;)[1]
+def currentChangeInfo = new URL(gerrit + /changes/?q=project:GerritForge/spark-cdc-library&amp;O=81&amp;pp=0&amp;n=&quot; + patchsetRevision).getText().split(&quot;\n&quot;)[1]
+
+println &quot;Current change info are &quot; + currentChangeInfo
+
+def currentTopic = currentChangeInfo.topic
+
+def topic = new URL(gerrit + &quot;/changes/?q=status:open+project:GerritForge/spark-etl-demo+topic:&quot; + currentTopic + &quot;&amp;pp=0&quot;).getText().split(&quot;\n&quot;)[1]
 def topicJson = jsonSlurper.parseText(topic)
 
 println topicJson
