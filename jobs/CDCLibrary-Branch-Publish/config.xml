@@ -112,7 +112,7 @@ def currentChangeInfoJson = jsonSlurper.parseText(currentChangeInfo).find { it._
 
 println &quot;Current change info are &quot; + currentChangeInfoJson
 
-def currentTopic = currentChangeInfo.topic
+def currentTopic = currentChangeInfoJson.topic
 
 //def topic = new URL(gerrit + &quot;/changes/?q=status:open+project:GerritForge/spark-etl-demo+topic:&quot; + currentTopic + &quot;&amp;pp=0&quot;).getText().split(&quot;\n&quot;)[1]
 //def topicJson = jsonSlurper.parseText(topic)
