@@ -98,11 +98,11 @@ import groovy.json.*
 
 def jsonSlurper = new JsonSlurper()
 
-def patchsetRevision = System.getenv()[&quot;GERRIT_PATCHSET_REVISION&quot;]
-println &quot;Gerrit revision is &quot; + patchsetRevision
+def changeNumber =  build.buildVariableResolver.resolve(&quot;GERRIT_CHANGE_NUMBER&quot;)
+println &quot;Gerrit change number is &quot; + changeNumber
 
 def gerrit = &quot;http://juc-gerrit.gerritforge.com&quot;
-def currentChangeInfo = new URL(gerrit + &quot;/changes/?q=project:GerritForge/spark-cdc-library&amp;O=81&amp;pp=0&amp;n=&quot; + patchsetRevision).getText().split(&quot;\n&quot;)[1]
+def currentChangeInfo = new URL(gerrit + &quot;/changes/?q=project:GerritForge/spark-cdc-library&amp;O=81&amp;pp=0&amp;n=&quot; + changeNumber).getText().split(&quot;\n&quot;)[1]
 
 println &quot;Current change info are &quot; + currentChangeInfo
 
