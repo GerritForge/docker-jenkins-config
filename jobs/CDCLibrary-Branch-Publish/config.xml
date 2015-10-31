@@ -98,6 +98,9 @@ import groovy.json.*
 
 def jsonSlurper = new JsonSlurper()
 
+def thr = Thread.currentThread()
+def build = thr?.executable
+
 def changeNumber =  build.buildVariableResolver.resolve(&quot;GERRIT_CHANGE_NUMBER&quot;)
 println &quot;Gerrit change number is &quot; + changeNumber
 
