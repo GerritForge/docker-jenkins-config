@@ -105,18 +105,21 @@ def changeNumber =  build.buildVariableResolver.resolve(&quot;GERRIT_CHANGE_NUMB
 println &quot;Gerrit change number is &quot; + changeNumber
 
 def gerrit = &quot;http://juc-gerrit.gerritforge.com&quot;
+
 def currentChangeInfo = new URL(gerrit + &quot;/changes/?q=project:GerritForge/spark-cdc-library&amp;O=81&amp;pp=0&amp;n=&quot; + changeNumber).getText().split(&quot;\n&quot;)[1]
 
-println &quot;Current change info are &quot; + currentChangeInfo
+def currentChangeInfoJson = jsonSlurper.parseText(currentChangeInfo).find(_._number.toString == changeNumber)
+
+println &quot;Current change info are &quot; + currentChangeInfoJson
 
 def currentTopic = currentChangeInfo.topic
 
-def topic = new URL(gerrit + &quot;/changes/?q=status:open+project:GerritForge/spark-etl-demo+topic:&quot; + currentTopic + &quot;&amp;pp=0&quot;).getText().split(&quot;\n&quot;)[1]
-def topicJson = jsonSlurper.parseText(topic)
+//def topic = new URL(gerrit + &quot;/changes/?q=status:open+project:GerritForge/spark-etl-demo+topic:&quot; + currentTopic + &quot;&amp;pp=0&quot;).getText().split(&quot;\n&quot;)[1]
+//def topicJson = jsonSlurper.parseText(topic)
 
-println topicJson
+//println topicJson
 
-def change = new URL(gerrit + &quot;/changes/&quot; + topicJson[0]._number + &quot;/detail?o=CURRENT_REVISION&amp;pp=0&quot;).getText().split(&quot;\n&quot;)[1]
+def change = new URL(gerrit + &quot;/changes/&quot; + changeNumber + &quot;/detail?o=CURRENT_REVISION&amp;pp=0&quot;).getText().split(&quot;\n&quot;)[1]
 def changeJson = jsonSlurper.parseText(change)
 
 println changeJson.current_revision
