@@ -114,12 +114,12 @@ println &quot;Current change info are &quot; + currentChangeInfoJson
 
 def currentTopic = currentChangeInfoJson.topic
 
-def topic = new URL(gerrit + &quot;/changes/?q=status:open+project:GerritForge/spark-etl-demo+topic:&quot; + currentTopic + &quot;&amp;pp=0&quot;).getText().split(&quot;\n&quot;)[1]
-def topicJson = jsonSlurper.parseText(topic)
+def dependentJobChange = new URL(gerrit + &quot;/changes/?q=status:open+project:GerritForge/spark-etl-demo+topic:&quot; + currentTopic + &quot;&amp;pp=0&quot;).getText().split(&quot;\n&quot;)[1]
+def dependentJobChangeJson = jsonSlurper.parseText(topic)
 
-println &quot;topic is &quot; + topicJson
+println &quot;ETL Job Change Info is &quot; + dependentJobChangeJson
 
-def change = new URL(gerrit + &quot;/changes/&quot; + topicJson.change_number + &quot;/detail?o=CURRENT_REVISION&amp;pp=0&quot;).getText().split(&quot;\n&quot;)[1]
+def change = new URL(gerrit + &quot;/changes/&quot; + dependentJobChangeJson._number + &quot;/detail?o=CURRENT_REVISION&amp;pp=0&quot;).getText().split(&quot;\n&quot;)[1]
 def changeJson = jsonSlurper.parseText(change)
 
 println changeJson.current_revision
