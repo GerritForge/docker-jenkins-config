@@ -57,7 +57,7 @@
       <filterQueue>false</filterQueue>
       <properties class="hudson.model.View$PropertyList"/>
       <gridBuilder class="au.com.centrumsystems.hudson.plugin.buildpipeline.DownstreamProjectGridBuilder">
-        <firstJob>SparkJob-Branch-UnitTest</firstJob>
+        <firstJob>SparkJob-ETL-Branch-UnitTest</firstJob>
         <firstJobLink>job/SparkJob-Branch-UnitTest/</firstJobLink>
       </gridBuilder>
       <noOfDisplayedBuilds>1</noOfDisplayedBuilds>

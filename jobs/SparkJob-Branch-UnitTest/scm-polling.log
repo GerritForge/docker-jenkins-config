@@ -1,8 +1,0 @@
-Started on Jun 15, 2015 1:44:00 PM
-Using strategy: Default
-[poll] Last Built Revision: Revision 8370d22e7415444b8ca6c543ef8186e72a102d1f (refs/remotes/origin/master)
- > git --version # timeout=10
- > git -c core.askpass=true ls-remote -h ssh://gerritforgebuild@mesos1.gerritforge.com:29418/GerritForge/spark-etl-demo.git # timeout=10
-[poll] Latest remote head revision on origin/master is: 8370d22e7415444b8ca6c543ef8186e72a102d1f - already built by 1
-Done. Took 75 ms
-No changes
